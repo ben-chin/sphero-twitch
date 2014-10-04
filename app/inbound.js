@@ -11,6 +11,10 @@ var express = require('express');
 
 var app = express();
 
+app.configure(function(){
+  app.use(express.bodyParser());
+});
+
 // Create a route to respond to a call
 app.post('/', function(req, res) {
     if (twilio.validateExpressRequest(req, TWILIO_AUTH_TOKEN)) {
