@@ -12,10 +12,6 @@ var bodyParser = require('body-parser')
 var app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.configure(function(){
-  app.use(express.bodyParser());
-});
-
 // Create a route to respond to a call
 app.post('/inbound', function(req, res) {
     switch(req.body.Body) {
