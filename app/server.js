@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
 		sphero.name = data.name;
 		sphero.connection.port = portmask.replace('***', data.name);
 
-		Cylon.robot(sphero);
+		Cylon.robot(sphero).start();
 	});
 
 	/* Starting spheros */

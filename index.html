@@ -5,17 +5,35 @@
 	</head>
 
 	<body>
-	som
+		
+		<div ng-app="spheroTwitch">
+
+			<div ng-controller="SpheroCtrl">
+				<input type="text" ng-model="spheroName" placeholder="Sphero name..." />
+				<button ng-click="connectToSphero(spheroName)">Send</button>
+				<br/><br/><br/><br/>
+				<button ng-click="startCalibration()">Start Calibration</button>
+				<button ng-click="stopCalibration()">Finish Calibration</button>
+				<br/><br/><br/><br/><br/><br/>
+				<button ng-click="playMove(0)">Forward</button>
+				<button ng-click="playMove(260)">Left</button>
+				<button ng-click="playMove(100)">Right</button>
+				<button ng-click="playMove(180)">Back</button>
+				<br/><br/>
+				<button ng-click="playStop()">Stop</button>
+			</div>
+
+		</div>
 
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script src="static/vendor/angular.min.js"></script>
-		<script src="static/vendor/angular-animate.min.js"></script>
-		<script src="static/vendor/socket.js"></script>
-		<script src="static/spheromanager.js"></script>
-		<script src="static/services.js"></script>
-		<script src="static/controllers.js"></script>
-		<script src="static/app.js"></script>
-		<script src="static/main.js"></script>
+		<script src="static/js/vendor/angular.min.js"></script>
+		<script src="static/js/vendor/angular-animate.min.js"></script>
+		<script src="static/js/vendor/socket.js"></script>
+		<script src="static/js/spheromanager.js"></script>
+		<script src="static/js/app/services.js"></script>
+		<script src="static/js/app/controllers.js"></script>
+		<script src="static/js/app/app.js"></script>
+		<script src="static/js/main.js"></script>
 	</body>
 </html>
