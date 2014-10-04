@@ -59,68 +59,68 @@ var Sphero = (function() {
 					my.sphero.finishCalibration();
 				});
 
-			this.socket
-				.on('play-sphero', function(data) {
-					if(!data.broadcast) {
-						if(data.sphero != name) return;
-					}
+			// this.socket
+			// 	.on('play-sphero', function(data) {
+			// 		if(!data.broadcast) {
+			// 			if(data.sphero != name) return;
+			// 		}
 
-					console.log('Playing sphero');
-					console.log(data);
+			// 		console.log('Playing sphero');
+			// 		console.log(data);
 
-					var moves = data.moves;
-					var i = 0;
-					every(data.time_unit, function() {
-						if(moves[i]) {
-							console.log(moves[i].params);
+			// 		var moves = data.moves;
+			// 		var i = 0;
+			// 		every(data.time_unit, function() {
+			// 			if(moves[i]) {
+			// 				console.log(moves[i].params);
 							
-							if(moves[i].params.move) {
-								console.log('hoi');
-								my.sphero.roll(
-									DEFAULT_SPEED, 
-									moves[i].params.heading
-								);
-							} else {
-								my.sphero.stop();
-							}
-							if(moves[i].params.color) {
-								my.sphero.setRGB(moves[i].params.color);
-							}
-						} else {
-							my.sphero.stop();
-						}
+			// 				if(moves[i].params.move) {
+			// 					console.log('hoi');
+			// 					my.sphero.roll(
+			// 						DEFAULT_SPEED, 
+			// 						moves[i].params.heading
+			// 					);
+			// 				} else {
+			// 					my.sphero.stop();
+			// 				}
+			// 				if(moves[i].params.color) {
+			// 					my.sphero.setRGB(moves[i].params.color);
+			// 				}
+			// 			} else {
+			// 				my.sphero.stop();
+			// 			}
 						
-						i++;
-					});
+			// 			i++;
+			// 		});
 					
-				})
-				.on('sphero-start-calibration', function(data) {
-					console.log('Starting calibration');
-					if(!data.broadcast) {
-						if(data.sphero != name) return;
-					}
-					console.log('Forced exit');
-					my.sphero.startCalibration();
-				})
-				.on('sphero-stop-calibration', function(data) {
-					if(!data.broadcast) {
-						if(data.sphero != name) return;
-					}
-					my.sphero.finishCalibration();
-				})
-				.on('disconnect', function() {
-					this.disconnect(name);
-				}.bind(this))
-				.on('deactivate-sphero', function(data) {
-					if(!data.broadcast) {
-						if(data.sphero != name) return;
-					}
+			// 	})
+			// 	.on('sphero-start-calibration', function(data) {
+			// 		console.log('Starting calibration');
+			// 		if(!data.broadcast) {
+			// 			if(data.sphero != name) return;
+			// 		}
+			// 		console.log('Forced exit');
+			// 		my.sphero.startCalibration();
+			// 	})
+			// 	.on('sphero-stop-calibration', function(data) {
+			// 		if(!data.broadcast) {
+			// 			if(data.sphero != name) return;
+			// 		}
+			// 		my.sphero.finishCalibration();
+			// 	})
+			// 	.on('disconnect', function() {
+			// 		this.disconnect(name);
+			// 	}.bind(this))
+			// 	.on('deactivate-sphero', function(data) {
+			// 		if(!data.broadcast) {
+			// 			if(data.sphero != name) return;
+			// 		}
 
-					this.disconnect(name);
-					this.socket.emit('sphero-deactivated', {
-						name: name
-					});
-				}.bind(this));
+			// 		this.disconnect(name);
+			// 		this.socket.emit('sphero-deactivated', {
+			// 			name: name
+			// 		});
+			// 	}.bind(this));
 
 			my.sphero.setRGB('0x0000FF');
 
