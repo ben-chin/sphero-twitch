@@ -8,7 +8,10 @@
     "cylon-sphero": "*",
     "socket.io": "*",
     "sleep": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "twilio": "*",
+    "dotenv": "0.4.0",
+    "express": "*"
   },
   "license": "MIT"
 }
