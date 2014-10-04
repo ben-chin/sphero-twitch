@@ -7,6 +7,9 @@ dotenv.load();
 var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 
 var express = require('express');
+var http = require('http');
+var path = require('path');
+var twilio = require('twilio');
 var bodyParser = require('body-parser')
 
 var app = express()
@@ -37,7 +40,6 @@ app.post('/inbound', function(req, res) {
             //add B to the queue
             break;
         default:
-            console.log('swag');
             //sms back and tell them the deal
             break;
     }

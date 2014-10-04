@@ -11,7 +11,8 @@
     "underscore": "*",
     "twilio": "*",
     "dotenv": "0.4.0",
-    "express": "*"
+    "express": "*",
+    "body-parser":"*"
   },
   "license": "MIT"
 }
