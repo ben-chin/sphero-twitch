@@ -44,6 +44,11 @@ var initializeSphero = function(name, color) {
     sphero.work = function(my) {
         twero.addSpheroInstance(name, my);
         my.sphero.setRGB(color);
+
+        my.sphero.startCalibration();
+        after((5).seconds(), function () {
+            my.sphero.finishCalibration();
+        });
     }
 
     Cylon.robot(sphero);
@@ -153,5 +158,6 @@ app.post('/inbound', function(req, res) {
         }
     } catch (err) {
         console.log("This broke");
+        console.log(err);
     }
 });

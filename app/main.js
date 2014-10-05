@@ -36,8 +36,9 @@ var Twero = (function() {
     }
 
     Twero.prototype.move = function(direction, number) {
-        var spheroInstance = this.getSpheroinstance(number);
-        console.log("Moving sphero " + sphero + " in direction " + direction);
+        var spheroInstance = this.getSpheroInstance(number);
+        var spheroName = spheroColours[spheroInstance.robot.name];
+        console.log("Moving sphero " + spheroName + " in direction " + direction);
 
         after((0.5).seconds(), function () {
             spheroInstance.stop();
@@ -45,7 +46,7 @@ var Twero = (function() {
         spheroInstance.roll(200, direction); 
     }
 
-    Twero.prototype.getSpheroinstance = function (number) {
+    Twero.prototype.getSpheroInstance = function (number) {
         var sphero = this.spheros[this.teams[number]];
         return this.spheroInstances[sphero].sphero;
     }
