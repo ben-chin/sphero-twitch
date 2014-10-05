@@ -1,6 +1,11 @@
 var reply = require('./twilio/reply.js');
 // var map = {}
 
+var spheroColours = {
+    'YBR' : 'Blue',
+    'BOR': 'Red',
+    'GBR': 'Green'
+}
 var Twero = (function() {
 
     /* Constructor */
@@ -19,13 +24,15 @@ var Twero = (function() {
 
     Twero.prototype.register = function(number) {
         this.teams[number] = this.currSphero;
-        this.currSphero = (this.currSphero + 1) % this.spheros.length;
 
-        message = "You're part of team " + this.spheros[this.currSphero] + 
+        message = "You're part of team " 
+        + spheroColours[this.spheros[this.currSphero]] + 
             "! Text [U]p, [D]own, [L]eft, [R]ight to control your team's sphero." + 
             " Good luck :)";
 
         this.r.sendMessage(number, message);
+
+        this.currSphero = (this.currSphero + 1) % this.spheros.length;
     }
 
     Twero.prototype.move = function(direction, number) {
