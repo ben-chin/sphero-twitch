@@ -51,23 +51,30 @@ Cylon.start();
 // Create a route to respond to a call
 app.post('/inbound', function(req, res) {
     console.log(req.body.Body);
-    switch(req.body.Body) {
-        case 'REG': 
-            number = req.body.From;
-            twero.register(number);
-            break;
-        case 'F':
-            twero.move(number, 0);
-        case 'B':
-            twero.move(number, 180);
-        case 'L':
-            twero.move(number, 260);
-        case 'R':
-            twero.move(number, 100);
-            break;
-        default:
-            console.log('swag');
-            break;
+    try {
+        switch(req.body.Body) {
+            case 'REG': 
+                number = req.body.From;
+                twero.register(number);
+                break;
+            case 'U':
+                twero.move(0, number);
+                break;
+            case 'D':
+                twero.move(180, number);
+                break;
+            case 'L':
+                twero.move(260, number);
+                break;
+            case 'R':
+                twero.move(100, number);
+                break;
+            default:
+                console.log('swag');
+                break;
+        }
+    } catch (err) {
+        console.log("This broke");
     }
 });
 
