@@ -5,31 +5,33 @@ sControllers.controller('SpheroCtrl', [
 	function ($scope, Socket) {
 
 		Socket.forward('sphero_connected');
-		$scope.$on('socket:sphero_connected', 
+
+		$scope.$on('socket:sphero_connected',
 			function (event, data) {
 				console.log(event);
 				console.log(data);
 			});
 
-		$scope.connectToSphero = function (name) {
+		$scope.connectToSphero = function(name) {
 			Socket.emit('incoming-sphero-connection', { name: name });
 		};
 
-		$scope.playStop = function () {
+		$scope.playStop = function (name) {
 			Socket.emit('play-stop');
 		};
 
 		$scope.startCalibration = function () {
 			Socket.emit('start-calibration');
-		};	
+		};
 
 		$scope.stopCalibration = function () {
 			Socket.emit('stop-calibration');
-		};	
+		};
 
-		$scope.playMove = function (heading) {
+		$scope.playMove = function(heading, name) {
 			Socket.emit('play-move', {
-				heading: heading
+				heading: heading,
+				name: name
 			});
 		};
 

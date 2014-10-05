@@ -5,7 +5,7 @@
 	</head>
 
 	<body>
-		
+
 		<div ng-app="spheroTwitch">
 
 			<div ng-controller="SpheroCtrl">
@@ -15,12 +15,12 @@
 				<button ng-click="startCalibration()">Start Calibration</button>
 				<button ng-click="stopCalibration()">Finish Calibration</button>
 				<br/><br/><br/><br/><br/><br/>
-				<button ng-click="playMove(0)">Forward</button>
-				<button ng-click="playMove(260)">Left</button>
-				<button ng-click="playMove(100)">Right</button>
-				<button ng-click="playMove(180)">Back</button>
+				<button ng-click="playMove(0, spheroName)">Forward</button>
+				<button ng-click="playMove(260, spheroName)">Left</button>
+				<button ng-click="playMove(100, spheroName)">Right</button>
+				<button ng-click="playMove(180, spheroName)">Back</button>
 				<br/><br/>
-				<button ng-click="playStop()">Stop</button>
+				<button ng-click="playStop(spheroName)">Stop</button>
 			</div>
 
 		</div>
