@@ -32,7 +32,7 @@ var twero = new main.Twero();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-var initializeSphero = function(name) {
+var initializeSphero = function(name, color) {
     var portmask = "/dev/tty.Sphero-***-AMP-SPP";
     var sphero = new SpheroFactory.Sphero();
 
@@ -40,14 +40,15 @@ var initializeSphero = function(name) {
     sphero.connection.port = portmask.replace('***', name);
     sphero.work = function(my) {
         twero.addSpheroInstance(name, my);
+        my.sphero.setRGB(color);
     }
 
     Cylon.robot(sphero);
 }
 
-initializeSphero('YBR');
-initializeSphero('BOR');
-initializeSphero('GBR');
+initializeSphero('YBR', '0x0000FF'); // blue
+initializeSphero('BOR', '0xFF0000'); // red
+initializeSphero('GBR', '0x00FF00'); // green
 Cylon.start();
 
 // Create a route to respond to a call
