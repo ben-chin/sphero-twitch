@@ -46,7 +46,7 @@ var initializeSphero = function(name, color) {
     Cylon.robot(sphero);
 }
 
-initializeSphero('YBR', '0x0000FF'); // blue
+// initializeSphero('YBR', '0x0000FF'); // blue
 initializeSphero('BOR', '0xFF0000'); // red
 initializeSphero('GBR', '0x00FF00'); // green
 Cylon.start();
@@ -56,7 +56,7 @@ app.post('/inbound', function(req, res) {
     console.log(req.body.Body);
     try {
         var number = req.body.From;
-        switch(req.body.Body) {
+        switch(req.body.Body.toUpperCase()) {
             case 'REG':
                 twero.register(number);
                 break;
