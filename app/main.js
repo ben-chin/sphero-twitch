@@ -14,12 +14,12 @@ var Twero = (function() {
 
     Twero.prototype.addSpheroInstance = function(name, instance) {
         this.spheros.push(name);
-        this.spheroInstance[name] = instance;
+        this.spheroInstances[name] = instance;
     }
 
     Twero.prototype.register = function(number) {
         this.teams[number] = this.currSphero;
-        this.currSphero = (this.currSphero + 1) % spheros.length;
+        this.currSphero = (this.currSphero + 1) % this.spheros.length;
 
         message = "You're part of team " + this.spheros[this.currSphero] + 
             "! Text [U]p, [D]own, [L]eft, [R]ight to control your team's sphero." + 
@@ -30,12 +30,13 @@ var Twero = (function() {
 
     Twero.prototype.move = function(direction, number) {
         var sphero = this.spheros[this.teams[number]];
+        var spheroInstance = this.spheroInstances[sphero].sphero;
         console.log("Moving sphero " + sphero + " in direction " + direction);
 
         after((0.5).seconds(), function () {
-            my.sphero.stop();
+            spheroInstance.stop();
         });
-        spheroInstances[sphero].sphero.roll(200, direction); 
+        spheroInstance.roll(200, direction); 
     }
 
     return Twero;
