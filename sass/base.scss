@@ -1,0 +1,461 @@
+// Import bootstrap
+@import "vendor/bootstrap";
+
+@import "variables";
+
+// ==============================
+// Custom styles here 
+// ============================== 
+
+
+// DEBUG
+.debug {
+	position: fixed;
+	z-index: 5000;
+	background-color: rgba(0,0,0,0.5);
+	color: #FFF;
+
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-family: $main-font;
+
+	a {
+		color: $hc-color;
+		@include transition(color 0.2s ease-out 0.1s);
+		
+		&:hover { 
+			color: darken($hc-color, 15%);
+			text-decoration: none; 
+			@include transition(color 0.2s ease-in-out);
+		}
+	}
+}
+
+.hc-button {
+	background-color: $hc-color;
+	font-weight: 300;
+	color: white;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	border: none;
+	border-bottom: 3px solid darken($hc-color, 15%);
+	padding: 8px 40px;
+
+	&:hover {
+		background-color: lighten($hc-color, 2%);
+		border-color: darken($hc-color, 5%);
+	}
+}
+
+
+/*  Navbar
+ * ============= */
+
+.topbar.navbar-default {
+	background-color: rgba(255, 151, 59, 0);
+	border: none;
+
+	//padding-bottom: 20px;
+
+	.navbar-header {
+		height: 90px;
+	}
+
+	.nav {
+		padding-top: 20px;
+
+		li {
+
+			a {
+				bottom: 0;
+				font-family: $heading-font;
+				font-size: 0.9em;
+				font-weight: 300;
+				color: #FFF;
+				letter-spacing: 0.5px;
+				text-transform: uppercase;
+				@include transition(bottom 0.2s ease-out);
+
+				&:hover {
+					background: none;
+					color: #FFF;
+					bottom: 3px;
+					@include transition(bottom 0.2s ease-in-out);
+				}
+			}
+		}
+	} 
+
+	.navbar-brand {
+		width: 250px;
+		padding: 0;
+
+		img {
+			width: 100%;
+		}
+	} 
+
+	.navbar-toggle {
+		margin-top: 20px;
+		background: none;
+		border: none;
+
+		&:hover {
+			background: none;
+			border: none;
+		}
+
+		.icon-bar {
+			background-color: #FFF;
+		}
+	}
+
+	.navbar-collapse {
+
+		@media (max-width: $grid-float-breakpoint-max) {
+			background-color: $hc-color;
+		}
+	}
+}
+
+
+.hero {
+	position: relative;
+	top: 0;
+	width: 100%;
+	height: 60%;
+	display: table;
+
+	background-color: $hc-color;
+	background-image: url('../images/hackkings.png');
+	background-size: cover;
+	background-position: center middle;
+
+	.lead-in {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		text-align: center;
+		
+		a {
+			color: #FFF;
+			font-size: 2em;
+
+			@include animation-duration(1.5s);
+			@include animation-delay(0.5s);
+			animation-iteration-count: infinite;
+			-webkit-animation-iteration-count: infinite;
+		}
+	}
+
+	.message {
+		display: table-cell;
+		vertical-align: middle;
+
+		h1 {
+			margin-top: 40px;
+			font-family: $main-font;
+			font-size: 1.5em;
+			text-align: center;
+			line-height: 1.5em;
+			letter-spacing: 1px;
+			font-weight: 300;
+			color: #FFF;
+		}
+
+		p {
+			text-align: center;
+			color: #FFF;
+			font-weight: 300;
+			letter-spacing: 0.8px;	
+		}
+	}
+
+}
+
+section.pane {
+	float: left;
+	width: 100%;
+	padding: 30px 0;
+
+	&> header {
+		text-align: center;
+
+		h2 {
+			font-family: $heading-font;
+			font-weight: 300;
+			font-size: 1.8em;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			color: $hc-color;
+		}
+	}
+}
+
+
+
+#mission {
+
+	.students,
+	.startups {
+
+		header {
+			padding-top: 30px;
+			
+			img {
+				height: 70px;
+			}
+
+			h3 {
+				font-family: $subheading-font;
+				font-size: 1.3em;
+				font-weight: 700;
+				letter-spacing: 0.5px;
+				text-transform: uppercase;
+				color: $hc-color;
+			}
+		}
+
+		p {
+			font-size: 1em;
+			line-height: 1.4em;
+			font-weight: 300;
+			color: lighten($body-color, 5%);
+			letter-spacing: 0.5px;
+		}
+	}
+
+	.students {
+		text-align: right;
+		padding-right: 60px;
+
+		&.shift {
+			padding-right: 20px;
+			padding-left: 55px;
+		}
+	}
+
+	.startups {
+		text-align: left;
+		padding-left: 60px;
+
+		&.shift {
+			padding-left: 20px;
+			padding-right: 55px;
+		}
+	}
+
+	.half {
+
+		&.shift {
+			@include transition(padding-left 1s ease-in-out, padding-right 1s ease-in-out);
+		}
+	}
+
+
+	.method {
+		margin: 30px 0;
+		padding: 45px 0;
+		background-color: #FCFCFC;
+		color: #BBB;
+
+		header {
+			text-align: center;
+			margin-bottom: 15px;
+
+			h4 {
+				font-family: $heading-font;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: darken(#BBB, 20%);
+			}
+
+			p {
+				font-size: 1em;
+			}
+		}
+
+		p {
+			text-align: center;
+			font-size: 1.1em;
+			color: #7B7F83;
+		}
+
+		.explanation {
+			padding: 10px 0;
+
+			header {
+				text-align: left;
+
+				h3 {
+					font-size: 1.5em;
+					font-weight: 300;
+					letter-spacing: 1px;
+					color: $hc-color;
+				}
+			}
+
+			p {
+				text-align: left;
+			}
+
+			.icon {
+				padding: 15px 30px;
+				text-align: center;
+
+				img {
+					width: 70%;
+				}
+			}
+		}
+	}
+}
+
+
+
+#team {
+
+	.member-row {
+		padding: 10px 0;
+		margin: 15px 0;
+	}
+
+	.member {
+		text-align: center;
+
+		img {
+			width: 80px;
+			height: 80px;
+			margin: 20px 0;
+		}
+
+		.name {
+			margin-top: 15px;
+			margin-bottom: 5px;
+			color: $hc-color;
+			font-size: 1em;
+			font-weight: 700;
+		}
+
+		.uni {
+			color: $muted-color;
+			font-size: 0.9em;
+			letter-spacing: 0.3px;
+		}
+	}
+}
+
+
+
+#partners {
+	background-image: url('../images/roundabout.png');
+	background-size: cover;
+	background-position: center top;
+
+	&> header {
+		h2 {
+			color: #FFF;
+		}
+	}
+
+	.wrap {
+		padding: 30px 0;
+	}
+
+	.partner {
+		padding: 5px 60px;
+
+		img {
+			width: 100%;
+		}
+
+		a {
+			width: 100%;
+			height: 100%;
+			display: block;
+
+			&:hover {
+
+				img {
+					// TODO
+				}
+			}
+		}
+	}
+}
+
+
+
+#register {
+
+	.register {
+		text-align: center;
+
+		&> header {
+			padding-top: 30px;
+
+			h4 {
+				font-family: $main-font;
+				font-size: 1.1em;
+				color: $muted-color;
+				font-weight: 300;
+				letter-spacing: 0.5px;
+			}
+		}
+
+		form {
+			padding: 20px 0;
+
+			.form-control {
+
+				&:focus {
+					border-color: $hc-color;
+					@include box-shadow(inset 0 1px 1px rgba(255, 151, 59, 0.35));
+				}
+			}
+
+			.button {
+				padding: 16px 0;
+				text-align: center;
+			}
+		}
+	}
+}
+
+
+
+#footer {
+	float: left;
+	width: 100%;
+	height: 100px;
+	background-color: #F1F1F1;
+	text-align: center;
+
+	&> .container {
+		height: 100%;
+		display: table;
+	}	
+
+	p {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+
+		font-size: 0.9em;
+		letter-spacing: 0.5px;
+		color: #787B81;
+		font-weight: 300;
+	}
+}
+
+
+
+
+

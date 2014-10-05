@@ -5,11 +5,18 @@ sControllers.controller('SpheroCtrl', [
 	function ($scope, Socket) {
 
 		Socket.forward('sphero_connected');
-
 		$scope.$on('socket:sphero_connected',
 			function (event, data) {
 				console.log(event);
 				console.log(data);
+			});
+
+		Socket.forward('player_registered');
+		$scope.$on('socket:player_registered',
+			function (event, data) {
+				console.log(event);
+				console.log(data);
+				
 			});
 
 		$scope.connectToSphero = function(name) {
