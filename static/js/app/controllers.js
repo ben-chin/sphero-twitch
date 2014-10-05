@@ -45,6 +45,7 @@ sControllers.controller('SpheroCtrl', [
 					number: data.number,
 					direction: data.move
 				};
+				
 				$scope.moves[data.sphero].push(move);
 			});
 
