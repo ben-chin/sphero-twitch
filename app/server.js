@@ -152,33 +152,3 @@ app.post('/inbound', function(req, res) {
         console.log("This broke");
     }
 });
-
-setInterval(function () {
-
-	io.emit('player-registered', {
-    	number: '98708947094',
-    	sphero: 'GBR' 
-    });
-
-    io.emit('player-registered', {
-    	number: '0094',
-    	sphero: 'BOR' 
-    });
-
-    io.emit('player-registered', {
-    	number: '18749870490944',
-    	sphero: 'YBR' 
-    });
-
-	// io.emit('add-move', {
- //    	sphero: 'BOR',
- //    	move: 'Left',
- //    	number: '0708090090'
- //    });
-
- //    io.emit('add-move', {
- //    	sphero: 'GBR',
- //    	move: 'right',
- //    	number: '070809033'
- //    });
-}, 1000);
