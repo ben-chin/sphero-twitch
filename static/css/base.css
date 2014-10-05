@@ -5018,249 +5018,40 @@ body {
     background-color: #ff9c45;
     border-color: #ff8921; }
 
-/*  Navbar
- * ============= */
-.topbar.navbar-default {
-  background-color: rgba(255, 151, 59, 0);
-  border: none; }
-  .topbar.navbar-default .navbar-header {
-    height: 90px; }
-  .topbar.navbar-default .nav {
-    padding-top: 20px; }
-    .topbar.navbar-default .nav li a {
-      bottom: 0;
-      font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-      font-size: 0.9em;
-      font-weight: 300;
-      color: #FFF;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      -webkit-transition: bottom 0.2s ease-out;
-      transition: bottom 0.2s ease-out; }
-      .topbar.navbar-default .nav li a:hover {
-        background: none;
-        color: #FFF;
-        bottom: 3px;
-        -webkit-transition: bottom 0.2s ease-in-out;
-        transition: bottom 0.2s ease-in-out; }
-  .topbar.navbar-default .navbar-brand {
-    width: 250px;
-    padding: 0; }
-    .topbar.navbar-default .navbar-brand img {
-      width: 100%; }
-  .topbar.navbar-default .navbar-toggle {
-    margin-top: 20px;
-    background: none;
-    border: none; }
-    .topbar.navbar-default .navbar-toggle:hover {
-      background: none;
-      border: none; }
-    .topbar.navbar-default .navbar-toggle .icon-bar {
-      background-color: #FFF; }
-  @media (max-width: 991px) {
-    .topbar.navbar-default .navbar-collapse {
-      background-color: #ff973b; } }
+header h1, header h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; }
+header h1 {
+  font-size: 2em;
+  color: #FF973b; }
+header h2 {
+  font-size: 1.6em; }
 
-.hero {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 60%;
-  display: table;
-  background-color: #ff973b;
-  background-image: url("../images/hackkings.png");
-  background-size: cover;
-  background-position: center middle; }
-  .hero .lead-in {
-    position: absolute;
+.height {
+  height: 100%; }
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  border-top: 1px solid #EEE;
+  overflow-y: scroll;
+  padding-top: 20px; }
+  ul li {
+    padding: 3px 0;
+    color: white;
+    font-weight: 300;
+    float: left;
     width: 100%;
-    bottom: 0;
-    text-align: center; }
-    .hero .lead-in a {
-      color: #FFF;
-      font-size: 2em;
-      -webkit-animation-duration: 1.5s;
-      animation-duration: 1.5s;
-      -webkit-animation-delay: 0.5s;
-      animation-delay: 0.5s;
-      animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite; }
-  .hero .message {
-    display: table-cell;
-    vertical-align: middle; }
-    .hero .message h1 {
-      margin-top: 40px;
-      font-family: "Oxygen", "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-      font-size: 1.5em;
-      text-align: center;
-      line-height: 1.5em;
-      letter-spacing: 1px;
-      font-weight: 300;
-      color: #FFF; }
-    .hero .message p {
-      text-align: center;
-      color: #FFF;
-      font-weight: 300;
-      letter-spacing: 0.8px; }
-
-section.pane {
-  float: left;
-  width: 100%;
-  padding: 30px 0; }
-  section.pane > header {
-    text-align: center; }
-    section.pane > header h2 {
-      font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-      font-weight: 300;
-      font-size: 1.8em;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ff973b; }
-
-#mission .students header,
-#mission .startups header {
-  padding-top: 30px; }
-  #mission .students header img,
-  #mission .startups header img {
-    height: 70px; }
-  #mission .students header h3,
-  #mission .startups header h3 {
-    font-family: "Droid Sans", "Oxygen", "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-    font-size: 1.3em;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: #ff973b; }
-#mission .students p,
-#mission .startups p {
-  font-size: 1em;
-  line-height: 1.4em;
-  font-weight: 300;
-  color: #575b5d;
-  letter-spacing: 0.5px; }
-#mission .students {
-  text-align: right;
-  padding-right: 60px; }
-  #mission .students.shift {
-    padding-right: 20px;
-    padding-left: 55px; }
-#mission .startups {
-  text-align: left;
-  padding-left: 60px; }
-  #mission .startups.shift {
-    padding-left: 20px;
-    padding-right: 55px; }
-#mission .half.shift {
-  -webkit-transition: padding-left 1s ease-in-out, padding-right 1s ease-in-out;
-  transition: padding-left 1s ease-in-out, padding-right 1s ease-in-out; }
-#mission .method {
-  margin: 30px 0;
-  padding: 45px 0;
-  background-color: #FCFCFC;
-  color: #BBB; }
-  #mission .method header {
-    text-align: center;
-    margin-bottom: 15px; }
-    #mission .method header h4 {
-      font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #888888; }
-    #mission .method header p {
-      font-size: 1em; }
-  #mission .method p {
-    text-align: center;
-    font-size: 1.1em;
-    color: #7B7F83; }
-  #mission .method .explanation {
-    padding: 10px 0; }
-    #mission .method .explanation header {
-      text-align: left; }
-      #mission .method .explanation header h3 {
-        font-size: 1.5em;
-        font-weight: 300;
-        letter-spacing: 1px;
-        color: #ff973b; }
-    #mission .method .explanation p {
-      text-align: left; }
-    #mission .method .explanation .icon {
-      padding: 15px 30px;
-      text-align: center; }
-      #mission .method .explanation .icon img {
-        width: 70%; }
-
-#team .member-row {
-  padding: 10px 0;
-  margin: 15px 0; }
-#team .member {
-  text-align: center; }
-  #team .member img {
-    width: 80px;
-    height: 80px;
-    margin: 20px 0; }
-  #team .member .name {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: #ff973b;
-    font-size: 1em;
-    font-weight: 700; }
-  #team .member .uni {
-    color: #a6a6a6;
-    font-size: 0.9em;
-    letter-spacing: 0.3px; }
-
-#partners {
-  background-image: url("../images/roundabout.png");
-  background-size: cover;
-  background-position: center top; }
-  #partners > header h2 {
-    color: #FFF; }
-  #partners .wrap {
-    padding: 30px 0; }
-  #partners .partner {
-    padding: 5px 60px; }
-    #partners .partner img {
-      width: 100%; }
-    #partners .partner a {
-      width: 100%;
-      height: 100%;
-      display: block; }
-
-#register .register {
-  text-align: center; }
-  #register .register > header {
-    padding-top: 30px; }
-    #register .register > header h4 {
-      font-family: "Oxygen", "Open Sans", "Helvetica Neue", "Helvetica", "Tahoma", sans-serif;
-      font-size: 1.1em;
-      color: #a6a6a6;
-      font-weight: 300;
-      letter-spacing: 0.5px; }
-  #register .register form {
-    padding: 20px 0; }
-    #register .register form .form-control:focus {
-      border-color: #ff973b;
-      -webkit-box-shadow: inset 0 1px 1px rgba(255, 151, 59, 0.35);
-      box-shadow: inset 0 1px 1px rgba(255, 151, 59, 0.35); }
-    #register .register form .button {
-      padding: 16px 0;
-      text-align: center; }
-
-#footer {
-  float: left;
-  width: 100%;
-  height: 100px;
-  background-color: #F1F1F1;
-  text-align: center; }
-  #footer > .container {
-    height: 100%;
-    display: table; }
-  #footer p {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 0.9em;
-    letter-spacing: 0.5px;
-    color: #787B81;
-    font-weight: 300; }
+    margin: 5px 0;
+    border-radius: 30px; }
+    ul li.red {
+      background-color: #e66f64; }
+    ul li.green {
+      background-color: #5ec35c; }
+    ul li.blue {
+      background-color: #2980b9; }
+    ul li p {
+      margin: 0;
+      padding: 3px 0; }

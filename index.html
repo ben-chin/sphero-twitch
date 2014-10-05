@@ -29,50 +29,85 @@
 
 	<body>
 
-		<div ng-app="spheroTwitch">
+		<div class="height" ng-app="spheroTwitch">
 
-			<div ng-controller="SpheroCtrl">
-				<input type="text" ng-model="spheroName" placeholder="Sphero name..." />
-				<button ng-click="connectToSphero(spheroName)">Send</button>
-				<br/><br/><br/><br/>
-				<button ng-click="startCalibration()">Start Calibration</button>
-				<button ng-click="stopCalibration()">Finish Calibration</button>
-				<br/><br/><br/><br/><br/><br/>
-				<button ng-click="playMove(0, spheroName)">Forward</button>
-				<button ng-click="playMove(260, spheroName)">Left</button>
-				<button ng-click="playMove(100, spheroName)">Right</button>
-				<button ng-click="playMove(180, spheroName)">Back</button>
-				<br/><br/>
-				<button ng-click="playStop(spheroName)">Stop</button>
+			<div class="height" ng-controller="SpheroCtrl">
 
-				<p>Players</p>
-				<ul>
-					<li ng-repeat="player in players">
-						{{ player.number }}
-						{{ player.team }}
-					</li>
-				</ul>
+				<div class="container" style="text-align: center; padding-top: 50px; position: fixed; top: 0; width: 100%; height: 100px;">
+					<header>
+						<h1>+44 203 389 7622</h1> 	
+					</header>
+				</div>
 
-				<p>Green</p>
-				<ul>
-					<li ng-repeat="move in moves.GBR">
-						<pre>{{ move.number }}</pre>
-					</li>
-				</ul>
+				<div class="container height" style="padding-top: 130px;">
 
-				<p>Red</p>
-				<ul>
-					<li ng-repeat="move in moves.BOR">
-						<pre>{{ move.number }}</pre>
-					</li>
-				</ul>
+					<div class="col-xs-3 height" style="overflow-y: scroll">
+						<header>
+							<h2>Players</h2>
+						</header>
+						<ul>
+							<li ng-repeat="player in players" ng-class="{ red: player.team == 'Red', blue: player.team == 'Blue', green: player.team == 'Green'}">
+								<div class="col-xs-8">
+									<p>{{ player.number }}</p>
+								</div>
+								<div class="col-xs-4">
+									<p>{{ player.team }}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
 
-				<p>Blue</p>
-				<ul>
-					<li ng-repeat="move in moves.YBR">
-						<pre>{{ move.number }}</pre>
-					</li>
-				</ul>
+
+					<div class="col-xs-3 height">
+						<header>
+							<h2 style="color: #5ec35c;">Green</h2>
+						</header>
+						<ul>
+							<li ng-repeat="move in moves.GBR" class="green">
+								<div class="col-xs-8">
+									<p>{{ move.number }}</p>
+								</div>
+								<div class="col-xs-4">
+									<p>{{ move.direction }}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-xs-3 height">
+						<header>
+							<h2 style="color: #E66F64;">Red</h2>
+						</header>
+						<ul>
+							<li ng-repeat="move in moves.BOR" class="red">
+								<div class="col-xs-8">
+									<p>{{ move.number }}</p>
+								</div>
+								<div class="col-xs-4">
+									<p>{{ move.direction }}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-xs-3 height">
+						<header>
+							<h2 style="color: #2980b9;">Blue</h2>
+						</header>
+						<ul>
+							<li ng-repeat="move in moves.YBR" class="blue">
+								<div class="col-xs-8">
+									<p>{{ move.number }}</p>
+								</div>
+								<div class="col-xs-4">
+									<p>{{ move.direction }}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
 			</div>
 
 		</div>
