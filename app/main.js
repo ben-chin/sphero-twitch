@@ -7,7 +7,7 @@ var Twero = (function() {
     function Twero() {
         this.r = new reply.Reply();
         this.teams = {};
-        this.spheros = ['R', 'G', 'B'];
+        this.spheros = ['YBR', 'YBR', 'YBR'];
         this.currSphero = 0;
     }
 
@@ -25,6 +25,11 @@ var Twero = (function() {
     Twero.prototype.move = function(direction, number) {
         sphero = this.spheros[this.teams[number]];
         console.log("Moving sphero " + sphero + " in direction " + direction);
+
+        // Socket.emit('play-move', {
+        //     heading: 0,
+        //     name: sphero
+        // });
         //TODO Integrate with sphero side and move correct sphero in 'direction'       
     }
 
