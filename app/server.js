@@ -1,4 +1,4 @@
-/* 
+/*
  * Imports
  * ========================= */
 
@@ -35,7 +35,7 @@ var twero = new main.Twero();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-var initializeSphero = function(name) {
+var initializeSphero = function(name, color) {
     var portmask = "/dev/tty.Sphero-***-AMP-SPP";
     var sphero = new SpheroFactory.Sphero();
 
@@ -43,12 +43,15 @@ var initializeSphero = function(name) {
     sphero.connection.port = portmask.replace('***', name);
     sphero.work = function(my) {
         twero.addSpheroInstance(name, my);
+        my.sphero.setRGB(color);
     }
 
-    Cylon.robot(sphero);   
+    Cylon.robot(sphero);
 }
 
-initializeSphero('YBR');    
+initializeSphero('YBR', '0x0000FF'); // blue
+initializeSphero('BOR', '0xFF0000'); // red
+initializeSphero('GBR', '0x00FF00'); // green
 Cylon.start();
 
 // app.get('/', function (req, res) {
@@ -80,9 +83,9 @@ io.on('connection', function(socket) {
 app.post('/inbound', function(req, res) {
     console.log(req.body.Body);
     try {
+        var number = req.body.From;
         switch(req.body.Body) {
-            case 'REG': 
-                number = req.body.From;
+            case 'REG':
                 twero.register(number);
                 var sphero = twero.getSpheroInstance(number);
                 var name = sphero.robot.name;
