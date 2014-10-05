@@ -16,53 +16,9 @@ var Router = require('./utils/router.js');
  * SERVER
  * ------------------------ */
 
-// var app = require('express')();
-// var io = require('socket.io')(http);
-
-// var server = http.createServer(function(req, resp) {
-// 	console.log('Connection to server');
-
-// 	var path = url.parse(req.url).pathname;
-// 	Router.route(path, resp);
-
-// });
-
-var express = require('express');
-var http = require('http');
-var app = express();
-
-app.use(function(req, res, next){ //This must be set before app.router
-   req.server = server;
-   next();
-});
-
-app.use(app.router); 
-
-app.server.listen(7890);
-
-// server.listen(7890);
-var io = io.listen(app.server);
-var socket; 
-io.on('connection', function(socket) {
-	/* New Sphero added */
-    socket = socket;
-	socket.on('incoming-sphero-connection', function(data) {
-		var portmask = "/dev/tty.Sphero-***-AMP-SPP";
-		var sphero = new SpheroFactory.Sphero(socket);
-
-		sphero.name = data.name;
-		sphero.connection.port = portmask.replace('***', data.name);
-
-		Cylon.robot(sphero).start();
-	});
-
-	/* Starting spheros */
-	socket.on('activate-spheros', function() {
-		Cylon.start();
-	});
-
-});
-
+var app = require('express')();
+var io = require('socket.io')(http);
+var server = require('http').Server(app);
 
 //Load environment variables
 dotenv._getKeysAndValuesFromEnvFilePath('twilio/config.env');
@@ -70,30 +26,44 @@ dotenv._setEnvs();
 dotenv.load();
 
 var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-
-
-// var app = express()
-app.use(bodyParser.urlencoded({ extended: false }))
+server.listen(8000);
 
 var twero = new main.Twero();
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+var initializeSphero = function(name) {
+    var portmask = "/dev/tty.Sphero-***-AMP-SPP";
+    var sphero = new SpheroFactory.Sphero();
+
+    sphero.name = name;
+    sphero.connection.port = portmask.replace('***', name);
+    sphero.work = function(my) {
+        twero.addSpheroInstance(name, my);
+    }
+
+    Cylon.robot(sphero);   
+}
+
+initializeSphero('YBR');    
+Cylon.start();
+
 // Create a route to respond to a call
 app.post('/inbound', function(req, res) {
-	console.log(req.body.Body);
+    console.log(req.body.Body);
     switch(req.body.Body) {
         case 'REG': 
             number = req.body.From;
             twero.register(number);
             break;
         case 'F':
+            twero.move(number, 0);
         case 'B':
+            twero.move(number, 180);
         case 'L':
+            twero.move(number, 260);
         case 'R':
-            socket.emit('play-move', {
-                heading: 0,
-                name: 'YBR'
-            });
-            // twero.move(req.body.Body, number);
+            twero.move(number, 100);
             break;
         default:
             console.log('swag');
@@ -101,4 +71,22 @@ app.post('/inbound', function(req, res) {
     }
 });
 
-app.listen(process.env.PORT || 8000);
+var io = io.listen(server);
+io.on('connection', function(socket) {
+	/* New Sphero added */
+	// socket.on('incoming-sphero-connection', function(data) {
+	// 	var portmask = "/dev/tty.Sphero-***-AMP-SPP";
+	// 	var sphero = new SpheroFactory.Sphero(socket);
+
+	// 	sphero.name = data.name;
+	// 	sphero.connection.port = portmask.replace('***', data.name);
+
+	// 	Cylon.robot(sphero).start();
+	// });
+
+	/* Starting spheros */
+	socket.on('activate-spheros', function() {
+		Cylon.start();
+	});
+});
+

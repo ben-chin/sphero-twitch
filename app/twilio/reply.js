@@ -16,7 +16,7 @@ var Reply = (function() {
             this.client.sendSms({
             to: number,
             from: this.twilioNumber,
-            body:message
+            body: message
         }, function(error, message) {
             if (!error) {
                 console.log('Success! The SID for this SMS message is:');
