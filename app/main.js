@@ -29,14 +29,18 @@ var Twero = (function() {
     }
 
     Twero.prototype.move = function(direction, number) {
-        var sphero = this.spheros[this.teams[number]];
-        var spheroInstance = this.spheroInstances[sphero].sphero;
+        var spheroInstance = this.getSpheroinstance(number);
         console.log("Moving sphero " + sphero + " in direction " + direction);
 
         after((0.5).seconds(), function () {
             spheroInstance.stop();
         });
         spheroInstance.roll(200, direction); 
+    }
+
+    Twero.prototype.getSpheroinstance = function (number) {
+        var sphero = this.spheros[this.teams[number]];
+        return this.spheroInstances[sphero].sphero;
     }
 
     return Twero;

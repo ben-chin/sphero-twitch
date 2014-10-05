@@ -44,6 +44,35 @@
 				<button ng-click="playMove(180, spheroName)">Back</button>
 				<br/><br/>
 				<button ng-click="playStop(spheroName)">Stop</button>
+
+				<p>Players</p>
+				<ul>
+					<li ng-repeat="player in players">
+						{{ player.number }}
+						{{ player.team }}
+					</li>
+				</ul>
+
+				<p>Green</p>
+				<ul>
+					<li ng-repeat="move in moves.GBR">
+						<pre>{{ move.number }}</pre>
+					</li>
+				</ul>
+
+				<p>Red</p>
+				<ul>
+					<li ng-repeat="move in moves.BOR">
+						<pre>{{ move.number }}</pre>
+					</li>
+				</ul>
+
+				<p>Blue</p>
+				<ul>
+					<li ng-repeat="move in moves.YBR">
+						<pre>{{ move.number }}</pre>
+					</li>
+				</ul>
 			</div>
 
 		</div>

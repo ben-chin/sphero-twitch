@@ -9,6 +9,8 @@ var dotenv = require('dotenv');
 var bodyParser = require('body-parser')
 var main = require('./main.js')
 
+var path = require('path')
+
 var SpheroFactory = require('./sphero.js');
 var Router = require('./utils/router.js');
 
@@ -16,7 +18,8 @@ var Router = require('./utils/router.js');
  * SERVER
  * ------------------------ */
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var io = require('socket.io')(http);
 var server = require('http').Server(app);
 
@@ -48,35 +51,11 @@ var initializeSphero = function(name) {
 initializeSphero('YBR');    
 Cylon.start();
 
-// Create a route to respond to a call
-app.post('/inbound', function(req, res) {
-    console.log(req.body.Body);
-    try {
-        switch(req.body.Body) {
-            case 'REG': 
-                number = req.body.From;
-                twero.register(number);
-                break;
-            case 'U':
-                twero.move(0, number);
-                break;
-            case 'D':
-                twero.move(180, number);
-                break;
-            case 'L':
-                twero.move(260, number);
-                break;
-            case 'R':
-                twero.move(100, number);
-                break;
-            default:
-                console.log('swag');
-                break;
-        }
-    } catch (err) {
-        console.log("This broke");
-    }
-});
+// app.get('/', function (req, res) {
+//   res.sendFile(path.resolve(__dirname + '/../index.html'));
+// });
+
+app.use(express.static(__dirname + '/../'));
 
 var io = io.listen(server);
 io.on('connection', function(socket) {
@@ -97,3 +76,109 @@ io.on('connection', function(socket) {
 	});
 });
 
+// Create a route to respond to a call
+app.post('/inbound', function(req, res) {
+    console.log(req.body.Body);
+    try {
+        switch(req.body.Body) {
+            case 'REG': 
+                number = req.body.From;
+                twero.register(number);
+                var sphero = twero.getSpheroInstance(number);
+                var name = sphero.robot.name;
+
+                io.emit('player-registered', {
+                	number: number,
+                	sphero: name 
+                });
+
+                break;
+            case 'U':
+                twero.move(0, number);
+                var sphero = twero.getSpheroInstance(number);
+                var name = sphero.robot.name;
+                
+                io.emit('add-move', {
+                	sphero: name,
+                	move: 'Up',
+                	number: number
+                });
+
+                break;
+            case 'D':
+                twero.move(180, number);
+
+                var sphero = twero.getSpheroInstance(number);
+                var name = sphero.robot.name;
+                
+                io.emit('add-move', {
+                	sphero: name,
+                	move: 'Down',
+                	number: number
+                });
+
+                break;
+            case 'L':
+                twero.move(260, number);
+
+                var sphero = twero.getSpheroInstance(number);
+                var name = sphero.robot.name;
+                
+                io.emit('add-move', {
+                	sphero: name,
+                	move: 'Left',
+                	number: number
+                });
+
+                break;
+            case 'R':
+                twero.move(100, number);
+
+                var sphero = twero.getSpheroInstance(number);
+                var name = sphero.robot.name;
+                
+                io.emit('add-move', {
+                	sphero: name,
+                	move: 'Right',
+                	number: number
+                });
+
+                break;
+            default:
+                console.log('swag');
+                break;
+        }
+    } catch (err) {
+        console.log("This broke");
+    }
+});
+
+setInterval(function () {
+
+	io.emit('player-registered', {
+    	number: '98708947094',
+    	sphero: 'GBR' 
+    });
+
+    io.emit('player-registered', {
+    	number: '0094',
+    	sphero: 'BOR' 
+    });
+
+    io.emit('player-registered', {
+    	number: '18749870490944',
+    	sphero: 'YBR' 
+    });
+
+	// io.emit('add-move', {
+ //    	sphero: 'BOR',
+ //    	move: 'Left',
+ //    	number: '0708090090'
+ //    });
+
+ //    io.emit('add-move', {
+ //    	sphero: 'GBR',
+ //    	move: 'right',
+ //    	number: '070809033'
+ //    });
+}, 1000);

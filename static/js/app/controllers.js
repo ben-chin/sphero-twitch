@@ -11,13 +11,43 @@ sControllers.controller('SpheroCtrl', [
 				console.log(data);
 			});
 
-		Socket.forward('player_registered');
-		$scope.$on('socket:player_registered',
+		Socket.forward('player-registered');
+		$scope.$on('socket:player-registered',
 			function (event, data) {
 				console.log(event);
 				console.log(data);
 				
+				var team = '';
+
+				if(data.sphero == 'GBR') {
+					team = 'Green';
+				} else if(data.sphero == 'BOR') {
+					team = 'Red';
+				} else if(data.sphero == 'YBR') {
+					team = 'Blue';
+				}
+
+				var player = {
+					number: data.number,
+					sphero: data.sphero,
+					team: team
+				};
+				$scope.players.push(player);
 			});
+
+		Socket.forward('add-move');
+		$scope.$on('socket:add-move',
+			function (event, data) {
+				console.log(event);
+				console.log(data);
+				
+				var move = {
+					number: data.number,
+					direction: data.move
+				};
+				$scope.moves[data.sphero].push(move);
+			});
+
 
 		$scope.connectToSphero = function(name) {
 			Socket.emit('incoming-sphero-connection', { name: name });
@@ -42,4 +72,13 @@ sControllers.controller('SpheroCtrl', [
 			});
 		};
 
+		$scope.spheros = ['GBR', 'BOR', 'YBR'];
+
+		$scope.players = [];
+
+		$scope.moves = {
+			GBR: [],
+			BOR: [],
+			YBR: []
+		};
 	}]);
