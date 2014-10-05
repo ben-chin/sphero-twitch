@@ -1,4 +1,4 @@
-/* 
+/*
  * Imports
  * ========================= */
 
@@ -42,10 +42,12 @@ var initializeSphero = function(name) {
         twero.addSpheroInstance(name, my);
     }
 
-    Cylon.robot(sphero);   
+    Cylon.robot(sphero);
 }
 
-initializeSphero('YBR');    
+initializeSphero('YBR');
+initializeSphero('BOR');
+initializeSphero('GBR');
 Cylon.start();
 
 // Create a route to respond to a call
@@ -53,7 +55,7 @@ app.post('/inbound', function(req, res) {
     console.log(req.body.Body);
     try {
         switch(req.body.Body) {
-            case 'REG': 
+            case 'REG':
                 number = req.body.From;
                 twero.register(number);
                 break;
