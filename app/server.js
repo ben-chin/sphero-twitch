@@ -54,9 +54,9 @@ Cylon.start();
 app.post('/inbound', function(req, res) {
     console.log(req.body.Body);
     try {
+        var number = req.body.From;
         switch(req.body.Body) {
             case 'REG':
-                number = req.body.From;
                 twero.register(number);
                 break;
             case 'U':
