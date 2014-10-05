@@ -1,5 +1,4 @@
 var reply = require('./twilio/reply.js');
-// var map = {}
 
 var spheroColours = {
     'YBR' : 'Blue',

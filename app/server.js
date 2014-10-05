@@ -7,7 +7,7 @@ var http = require('http');
 var url = require('url');
 var dotenv = require('dotenv');
 var bodyParser = require('body-parser')
-var main = require('./main.js')
+var tweroLib = require('./twero.js')
 
 var path = require('path')
 
@@ -29,11 +29,11 @@ dotenv._setEnvs();
 dotenv.load();
 
 var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-server.listen(8000);
-
-var twero = new main.Twero();
-
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(__dirname + '/../'));
+
+var twero = new tweroLib.Twero();
+var io = io.listen(server);
 
 var initializeSphero = function(name, color) {
     var portmask = "/dev/tty.Sphero-***-AMP-SPP";
@@ -59,34 +59,22 @@ initializeSphero('BOR', '0xFF0000'); // red
 initializeSphero('GBR', '0x00FF00'); // green
 Cylon.start();
 
-// app.get('/', function (req, res) {
-//   res.sendFile(path.resolve(__dirname + '/../index.html'));
-// });
+server.listen(8000);
 
-app.use(express.static(__dirname + '/../'));
+var moveSphero = function(number, direction, move) {
+    twero.move(direction, number);
+    var sphero = twero.getSpheroInstance(number);
+    var name = sphero.robot.name;
 
-var io = io.listen(server);
-io.on('connection', function(socket) {
-	/* New Sphero added */
-	// socket.on('incoming-sphero-connection', function(data) {
-	// 	var portmask = "/dev/tty.Sphero-***-AMP-SPP";
-	// 	var sphero = new SpheroFactory.Sphero(socket);
-
-	// 	sphero.name = data.name;
-	// 	sphero.connection.port = portmask.replace('***', data.name);
-
-	// 	Cylon.robot(sphero).start();
-	// });
-
-	/* Starting spheros */
-	socket.on('activate-spheros', function() {
-		Cylon.start();
-	});
-});
-
+    io.emit('add-move', {
+        sphero: name,
+        move: move,
+        number: number
+    });  
+}
 // Create a route to respond to a call
 app.post('/inbound', function(req, res) {
-    console.log(req.body.Body);
+    console.log("Recieved message: " + req.body.Body);
     try {
         var number = req.body.From;
         switch(req.body.Body.toUpperCase()) {
@@ -102,62 +90,22 @@ app.post('/inbound', function(req, res) {
 
                 break;
             case 'U':
-                twero.move(0, number);
-                var sphero = twero.getSpheroInstance(number);
-                var name = sphero.robot.name;
-                
-                io.emit('add-move', {
-                	sphero: name,
-                	move: 'Up',
-                	number: number
-                });
-
+                moveSphero(number, 0, 'Up');
                 break;
             case 'D':
-                twero.move(180, number);
-
-                var sphero = twero.getSpheroInstance(number);
-                var name = sphero.robot.name;
-                
-                io.emit('add-move', {
-                	sphero: name,
-                	move: 'Down',
-                	number: number
-                });
-
+                moveSphero(number, 180, 'Down');
                 break;
             case 'L':
-                twero.move(260, number);
-
-                var sphero = twero.getSpheroInstance(number);
-                var name = sphero.robot.name;
-                
-                io.emit('add-move', {
-                	sphero: name,
-                	move: 'Left',
-                	number: number
-                });
-
+                moveSphero(number, 260, 'Left');
                 break;
             case 'R':
-                twero.move(100, number);
-
-                var sphero = twero.getSpheroInstance(number);
-                var name = sphero.robot.name;
-                
-                io.emit('add-move', {
-                	sphero: name,
-                	move: 'Right',
-                	number: number
-                });
-
+                moveSphero(number, 1000, 'Left');
                 break;
             default:
-                console.log('swag');
+                console.log('Unrecognised message body');
                 break;
         }
     } catch (err) {
-        console.log("This broke");
-        console.log(err);
+        console.log("Caught error in inbound handler " + err);
     }
 });
